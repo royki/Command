@@ -5,36 +5,36 @@
     - /home
 
 - Information of a Users
-    - `/etc/passwd`
-    - `user_name:password:user_ID:group_ID:comment:home_directory:shell_name`
+    - `cat /etc/passwd`
+    - - Output in the following format: `user_name:password:user_ID:group_ID:comment:home_directory:shell_name`
 
 - Information of a Password
-    - `/etc/shadow` - store the password
+    - `cat /etc/shadow` - store the password
 
 - Information of a Group
-    - `/etc/group`
-    - `group_name:password:group_ID:list_of_users_in_the_group`
+    - `cat /etc/group`
+    - Output in the following format:`group_name:password:group_ID:list_of_users_in_the_group`
 
 - Add a User
     - `useradd USER_NAME`
-    - `useradd uoc`
+    - Example: `useradd uoc`
 
 - Delete a User
     - `userdel USER_NAME`
-    - `userdel uoc`
+    - Example: `userdel uoc`
 
 - Add a Comment to User
-    - usermod -c "Comment" USER_NAME`
+    - `usermod -c "Comment" USER_NAME`
 
 - Add a Group
     - `groupadd -r GROUP_NAME`
-    - `groupadd -r projectX`
-    - `groupadd -r projectY`
+    - Example: `groupadd -r projectX`
+    - Example: `groupadd -r projectY`
 
 - Add a User to a Group
     - `usermod -G GROUP_NAME USER_NAME`
-    - `usermod -G projectX uoc`
-    - `usermod -G projectX, projectY uoc`
+    - Example: `usermod -G projectX uoc`
+    - Example: `usermod -G projectX, projectY uoc`
 
 - Give the root previlages to an existing user
     - `usermod -a -G sudo USER_NAME`
@@ -113,14 +113,15 @@
 -------------
 
 `df`
-/dev/sda2
-/dev/sda1
+- `/dev/sda2`
+- `/dev/sda1`
 ------------------
-df -h
-du -h 
+- `df -h`
+- `du -h`
 ----------------------
-du --max-depth=1 -h 
+- du --max-depth=1 -h 
 ----------------------
+```bash
 /bin - executable command :: executable command of the system  -- cd, more, less, cat, ls, vi, copy
 /boot - boot the system, Linux kernel 
 /home - user home directory
@@ -138,66 +139,69 @@ du --max-depth=1 -h
 /usr/bin - clear, C compiler 
 /usr/etc - particular function of C 
 /usr/sbin - system administration utility for specific user administration - useradd usedel
+```
 
 ----------------------------------------------------------------
-Accounts & Password
+_Accounts & Password_
 - Remove dormant accounts -- account that no longer usage 
 - Remove unnecessary program -- 
-- User's Permission - umask values in - /etc/profile
+- User's Permission - `umask` values in - `/etc/profile`
 ---------------
-umask -S 
-u=rwx,g=rx,0=rx
+- `umask -S`
+- `u=rwx,g=rx,0=rx`
 
 ----------
-set uid permissions 
-ls -l /usr/bin/passwd
--rwsr-xr-x.
-s - set UID permission
+_Set uid permissions_
+- `ls -l /usr/bin/passwd`
+- `-rwsr-xr-x.`
+`s - set UID permission`
 
 ------------------------------
-Networking Overview
+_Networking Overview_
+```bash
+- Hardware - routers, wires, -> Ethernet[10baset, 100baset], Switch[hub, routers]
+- Packets[header] - information transfer among the computers
+- Protocols - govern the rule how the packets transmit through the network
+- [TCP,IP,UDP] - Application, Transport, Internet, Network Interface (Application, Transport) -> TCP/UDP; (Internet, Network Interface)->IP
+- Addressing - origin and destination address ->Port, HW address, (IP address, hostnames) -> DNS
+```
 
--Hardware - routers, wires, -> Ethernet[10baset, 100baset], Switch[hub, routers]
--Packets[header] - information transfer among the computers
--Protocols - govern the rule how the packets transmit through the network
-[TCP,IP,UDP] - Application, Transport, Internet, Network Interface
-(Application, Transport) -> TCP/UDP; (Internet, Network Interface)->IP
--Addressing - origin and destination address ->Port, HW address, (IP address, hostnames) -> DNS
+_To setup a name server_
+- `cat /etc/resolv.conf`
 
-
-To setup a name server -> cat /etc/resolv.conf
-----------------------
 ifconfig eth0/eth1/lo up ip_address netmask netmask_address
 route add default gw gateway_address
 
-point-to-point protocol (ppp) -> /usr/share/doc/ppp-2.4.5/scripts
-------------------
-connect to remote desktop
-telnet computer_name -> no encription, plain text
+_point-to-point protocol (ppp)_
+- `/usr/share/doc/ppp-2.4.5/scripts`
 
-----------------------
-ftp.google.com
-ftp
-gftp -> UI
------------------
-Firewalls - block access to any services
+_connect to remote desktop_
+- `telnet computer_name`(no encription, plain text)
 
-inetd -> TCP Wrappers - block access to specific services -- /etc/hosts.allow
- 							     /etc/hosts.deny
-Xinetd -> extended version of inetd 
+- `ftp.google.com`
+- `ftp`
+` gftp`(access UI)
 
------------------------------
-X windows
+_Firewalls_ (block access to any services)
 
-X server
+- inetd (TCP Wrappers - block access to specific services)
+    - `/etc/hosts.allow`
+    - `/etc/hosts.deny`
+- Xinetd (extended version of inetd)
 
-Window Manager
+_X windows_
 
-Desktop Environment - KDE, GNOME, CDE, KWM, SawFish
+_X server_
+
+_Window Manager_
+
+_Desktop Environment_
+- `KDE, GNOME, CDE, KWM, SawFish`
 
 ---------------------
-Runlevels /etc/inittab
-
+_Runlevels_
+- `/etc/inittab`
+```bash
 0 --- off
 1,s --- single-user mode
 2 --- multi-user, without networking
@@ -205,18 +209,17 @@ Runlevels /etc/inittab
 4 --- varies
 5 --- X Windows
 6 --- Shutdown, reboot
-
-Config Files
--user --- dot files [.bashrc;.profile ](user's home directory)
--system --- /etc
+```
+_Config Files_
+- user --- dot files [.bashrc;.profile ](user's home directory)
+- system --- `/etc/`
 
 -----
-Environment Variables -> env
+_Environment Variables_ 
+- `env`
 
-----------
-Configuring Printers and Services for file sharing
-------------
-
+_Configuring Printers and Services for file sharing_
+```
 NFS - Network File Sharing
 user -> lpr(line printer) -> lpd(line printer daemon)-> print queue -> printer
 print queue - postscript / [now Driver - GhostScripts -> PC to Printer connection]
@@ -226,16 +229,17 @@ lprm
 
 print queue -> /var/spool/lpd
 config -> /etc/princtcap
+```
+_Alternative Printing System_
+- `BSD, LPRng, CUPS`
 
-Alternative Printing System -> BSD, LPRng, CUPS
+_Windows_
+- Samba -smb (server message block)
+- CIFS
 
-Windows
-Samba -smb -> server message block
-CIFS
-
-Linux 
-NFS - Network File Sharing
-cat /etc/fstab
+_Linux_
+- NFS - Network File Sharing
+_ `cat /etc/fstab`
 
 ----------------------------
 smbclient path -U user_name
